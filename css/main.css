@@ -185,12 +185,24 @@ p {
     color: #3b5998;
 }
 
-.twitter {
-    color: #1DA1F2;
+.medium {
+    color: #000000;
 }
 
-.instagram {
-    color: #cd486b;
+.resume {
+    color: #c0392b;
+}
+
+.disclaimer {
+    font-size: 90%;
+    color: #6c757d;
+    border-left: 3px solid #ccc;
+    padding-left: 10px;
+    margin: 10px 0 20px 0;
+}
+
+.certs li {
+    margin-bottom: 6px;
 }
 
 .linkedin {
