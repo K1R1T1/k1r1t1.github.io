@@ -1,464 +1,496 @@
-@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i');
-@import url("https://fonts.googleapis.com/css?family=Heebo:400,500,600,900");
-/*! HTML5 Boilerplate v6.0.1 | MIT License | https://html5boilerplate.com/ */
-
-/*
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
-
 /* ==========================================================================
-   Base styles: opinionated defaults
+   Kiriti Yelamanchali — personal site
    ========================================================================== */
 
-html {
-    color: #222;
-    font-size: 1em;
-    line-height: 1.4;
+:root {
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --surface-2: #f2f1ec;
+    --text: #1b1b1f;
+    --muted: #6b6b73;
+    --line: #e6e4dd;
+    --accent: #2f5bea;
+    --accent-soft: rgba(47, 91, 234, 0.09);
+    --shadow: 0 1px 2px rgba(20, 20, 30, 0.04), 0 8px 24px rgba(20, 20, 30, 0.06);
+    --radius: 14px;
+    --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --serif: 'Fraunces', Georgia, serif;
 }
 
-/*
- * Remove text-shadow in selection highlight:
- * https://twitter.com/miketaylr/status/12228805301
- *
- * Vendor-prefixed and regular ::selection selectors cannot be combined:
- * https://stackoverflow.com/a/16982510/7133471
- *
- * Customize the background color to match your design.
- */
-
-::-moz-selection {
-    background: #b3d4fc;
-    text-shadow: none;
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #111114;
+        --surface: #18181c;
+        --surface-2: #202026;
+        --text: #ececef;
+        --muted: #9a9aa5;
+        --line: #2a2a31;
+        --accent: #7c9bff;
+        --accent-soft: rgba(124, 155, 255, 0.12);
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
 }
 
-::selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
-/*
- * A better looking default horizontal rule
- */
+html { scroll-behavior: smooth; }
 
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-}
-
-/*
- * Remove the gap between audio, canvas, iframes,
- * images, videos and the bottom of their containers:
- * https://github.com/h5bp/html5-boilerplate/issues/440
- */
-
-audio,
-canvas,
-iframe,
-img,
-svg,
-video {
-    vertical-align: middle;
-}
-
-/*
- * Remove default fieldset styles.
- */
-
-fieldset {
-    border: 0;
+body {
     margin: 0;
-    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
-/*
- * Allow only vertical resizing of textareas.
- */
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-textarea {
-    resize: vertical;
+::selection { background: var(--accent); color: #fff; }
+
+/* ---------- Layout ---------- */
+
+.layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 72px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 64px 32px;
 }
 
-/* ==========================================================================
-   Browser Upgrade Prompt
-   ========================================================================== */
-
-.browserupgrade {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
+.sidebar {
+    position: sticky;
+    top: 64px;
+    align-self: start;
 }
 
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-body { 
-    font-size: 13;
-    line-height: 1.5;
-    background-color: #FDFDFD;
-    overflow-x:hidden;
-}
+main { min-width: 0; }
 
-h1 {
-    font-family: 'Heebo', sans-serif;
-    font-weight: 600;
-    margin-top: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    margin-bottom: 10px;
-    font-size: 324%;
-}
+/* ---------- Sidebar ---------- */
 
-h2 {
-    font-family: 'Heebo', sans-serif;
-    font-weight: 500;
-    margin-top: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    margin-bottom: 10px;
-    font-size: 219%;
-}
-
-h3 {
-    font-family: 'Heebo', sans-serif;
-    font-weight: 400;
-    margin-top: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    margin-bottom: 5px;
-    font-size: 148%;
-}
-
-p {
-    font-family: 'Libre Baskerville', serif;
-    font-style: italic;
-    font-size: 100%;
-    color: #606060;
-}
-
-.bigger p {
-    font-size: 125%;
-    font-family: 'Libre Baskerville', serif;
-    font-style: normal;
-}
-
-.smaller {
-    font-size: 75%;
-}
-
-.container {
-    margin-top: 0px;
-    width: 100vw;
-    padding: 2%;
-    margin: 0px;
-    z-index: 2;
-    position: absolute;
-}
-
-.circular {
-    width: 100%;
+.avatar {
+    width: 148px;
+    height: 148px;
     border-radius: 50%;
+    object-fit: cover;
     display: block;
-    margin: auto;
-    margin-bottom: 15px;
+    border: 4px solid var(--surface);
+    box-shadow: var(--shadow);
 }
 
-.socialmediaicon {
-    margin-right: 4px;
+.name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 24px 0 10px;
 }
 
-.socialmediaicon:hover {
+.tagline {
+    font-size: 15px;
+    color: var(--muted);
+    min-height: 1.6em;
+    margin: 0 0 6px;
+}
+
+.typewrite > .wrap {
+    border-right: 2px solid var(--accent);
+    padding-right: 2px;
+}
+
+.location {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 24px;
+}
+
+.location i { margin-right: 6px; }
+
+.socials {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.socials a {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-size: 17px;
+    transition: transform .15s ease, border-color .15s ease, color .15s ease;
+}
+
+.socials a:hover {
     text-decoration: none;
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
-.icons a:hover {
-    text-decoration: none;
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--text);
+    color: var(--bg);
+    font-size: 14px;
+    font-weight: 500;
+    transition: transform .15s ease, opacity .15s ease;
 }
 
-.facebook {
-    color: #3b5998;
-}
+.btn:hover { text-decoration: none; transform: translateY(-1px); opacity: .9; }
 
-.medium {
-    color: #000000;
-}
-
-.resume {
-    color: #c0392b;
-}
-
-.disclaimer {
-    font-size: 90%;
-    color: #6c757d;
-    border-left: 3px solid #ccc;
-    padding-left: 10px;
-    margin: 10px 0 20px 0;
-}
-
-.certs li {
-    margin-bottom: 6px;
-}
-
-.linkedin {
-    color: #0077B5;
-}
-
-.github {
-    color: #333333;
-}
-
-.medium {
-    color: #333333;
-}
-
-.email {
-    color: #909497;
-}
-
-ul li {
-    margin: 0px;
-    padding: 0px; 
-}
-
-@media screen and (max-width:850px) {  
-    h1 {
-        font-size: 300%;
-    }
-}
-
-@media screen and (max-width:768px) {  
-    body {
-        font-size: 12px;
-    }
-
-    .circular {
-        width: 50%;
-    }
-
-    .container {
-        padding-top: 0;
-    }
-
-    .left {
-        padding: 5%;
-        text-align: center;
-        background-color: #F0F0F0;
-        margin-bottom: 15px;
-        margin-top: 0px;
-    }
-
-    .right { 
-        padding-left: 8%;
-        padding-right: 8%;
-    }
-}
-
-@media screen and (min-width:768px) {  
-    .right {
-        padding-left: 6%;
-    }
-
-    .fixed {
-        position: fixed;
-        width: 25%;
-    }
-
-    #background {
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        width: 29%;
-        height: 100%;
-        background-color: #F0F0F0;
-        z-index: 1;
-    }
-}
-
-@media screen and (min-width:1100px) {  
-    h1 {
-        font-size: 400%;
-    }
-}
-
-/* ==========================================================================
-   Helper classes
-   ========================================================================== */
-
-/*
- * Hide visually and from screen readers
- */
-
-.hidden {
-    display: none !important;
-}
-
-/*
- * Hide only visually, but have it available for screen readers:
- * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
- *
- * 1. For long content, line feeds are not interpreted as spaces and small width
- *    causes content to wrap 1 word per line:
- *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
- */
-
-.visuallyhidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    -webkit-clip-path: inset(50%);
-    clip-path: inset(50%);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
+.nav {
+    list-style: none;
     padding: 0;
-    position: absolute;
-    width: 1px;
-    white-space: nowrap; /* 1 */
+    margin: 36px 0 0;
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
 }
 
-/*
- * Extends the .visuallyhidden class to allow the element
- * to be focusable when navigated to via the keyboard:
- * https://www.drupal.org/node/897638
- */
+.nav a {
+    display: block;
+    padding: 5px 0;
+    color: var(--muted);
+    font-size: 14px;
+}
 
-.visuallyhidden.focusable:active,
-.visuallyhidden.focusable:focus {
-    clip: auto;
-    -webkit-clip-path: none;
-    clip-path: none;
-    height: auto;
+.nav a:hover { color: var(--text); text-decoration: none; }
+
+/* ---------- Sections ---------- */
+
+section { margin-bottom: 88px; }
+
+.eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+}
+
+.lead {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.4vw, 40px);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0 0 20px;
+}
+
+.lead em { font-style: italic; color: var(--accent); }
+
+.sub {
+    color: var(--muted);
+    font-size: 17px;
+    max-width: 600px;
     margin: 0;
-    overflow: visible;
-    position: static;
-    width: auto;
-    white-space: inherit;
 }
 
-/*
- * Hide visually and from screen readers, but maintain layout
- */
-
-.invisible {
-    visibility: hidden;
+.notice {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--text);
+    font-size: 13px;
 }
 
-/*
- * Clearfix: contain floats
- *
- * For modern browsers
- * 1. The space content is one way to avoid an Opera bug when the
- *    `contenteditable` attribute is included anywhere else in the document.
- *    Otherwise it causes space to appear at the top and bottom of elements
- *    that receive the `clearfix` class.
- * 2. The use of `table` rather than `block` is only necessary if using
- *    `:before` to contain the top-margins of child elements.
- */
+/* ---------- Stats ---------- */
 
-.clearfix:before,
-.clearfix:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 40px;
 }
 
-.clearfix:after {
-    clear: both;
+.stat {
+    background: var(--surface);
+    padding: 20px;
 }
 
-/* ==========================================================================
-   EXAMPLE Media Queries for Responsive Design.
-   These examples override the primary ('mobile first') styles.
-   Modify as content requires.
-   ========================================================================== */
-
-@media only screen and (min-width: 35em) {
-    /* Style adjustments for viewports that meet the condition */
+.stat b {
+    display: block;
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.3vw, 30px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    white-space: nowrap;
 }
 
-@media print,
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 1.25dppx),
-       (min-resolution: 120dpi) {
-    /* Style adjustments for high resolution devices */
+.stat span { font-size: 13px; color: var(--muted); }
+
+/* ---------- Project cards ---------- */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
 }
 
-/* ==========================================================================
-   Print styles.
-   Inlined to avoid the additional HTTP request:
-   http://www.phpied.com/delay-loading-your-print-css/
-   ========================================================================== */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
 
-@media print {
-    *,
-    *:before,
-    *:after {
-        background: transparent !important;
-        color: #000 !important; /* Black prints faster:
-                                   http://www.sanbeiji.com/archives/953 */
-        box-shadow: none !important;
-        text-shadow: none !important;
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+    border-color: transparent;
+}
+
+.card .metric {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    line-height: 1.1;
+}
+
+.card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 10px 0 4px;
+}
+
+.card p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+}
+
+.tag {
+    font-size: 12px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--muted);
+}
+
+/* ---------- Timeline ---------- */
+
+.timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.timeline li {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 24px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+}
+
+.timeline li:last-child { border-bottom: 1px solid var(--line); }
+
+.when {
+    font-size: 13px;
+    color: var(--muted);
+    padding-top: 3px;
+    font-variant-numeric: tabular-nums;
+}
+
+.role {
+    font-weight: 600;
+    margin: 0;
+}
+
+.org { color: var(--muted); font-weight: 400; }
+
+.timeline p {
+    margin: 4px 0 0;
+    font-size: 15px;
+    color: var(--muted);
+}
+
+.pill {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    vertical-align: 2px;
+}
+
+/* ---------- Certifications ---------- */
+
+.badges {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+    gap: 14px;
+}
+
+.badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 18px 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-size: 12.5px;
+    line-height: 1.35;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.badge:hover { text-decoration: none; transform: translateY(-3px); box-shadow: var(--shadow); }
+
+.badge img { width: 76px; height: 76px; object-fit: contain; }
+
+.badge img.tile { background: #ffffff; border-radius: 14px; padding: 4px; }
+
+.badge .icon {
+    width: 76px;
+    height: 76px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--surface-2);
+    font-size: 28px;
+    color: var(--muted);
+}
+
+/* ---------- Off the clock ---------- */
+
+.hobbies {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.hobby {
+    display: block;
+    padding: 24px;
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    color: var(--text);
+}
+
+a.hobby:hover { text-decoration: none; background: var(--accent-soft); }
+
+.hobby i { font-size: 24px; color: var(--accent); }
+
+.hobby h3 { font-size: 16px; font-weight: 600; margin: 14px 0 2px; }
+
+.hobby p { margin: 0; font-size: 14px; color: var(--muted); }
+
+/* ---------- Education ---------- */
+
+.edu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.edu > a {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--text);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.edu > a:hover { text-decoration: none; transform: translateY(-3px); box-shadow: var(--shadow); }
+
+.edu .logo {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    padding: 6px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+}
+
+.edu .logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+.edu .logo.wide { width: 96px; padding: 0; overflow: hidden; }
+.edu .logo.wide img { transform: scale(1.3); }
+
+.edu b { display: block; line-height: 1.3; }
+.edu b + span { font-size: 14px; color: var(--muted); }
+
+/* ---------- Footer ---------- */
+
+footer {
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+}
+
+footer p { margin: 4px 0; }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 960px) {
+    .layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 40px 20px;
     }
 
-    a,
-    a:visited {
-        text-decoration: underline;
-    }
+    .sidebar { position: static; text-align: center; }
+    .avatar { margin: 0 auto; width: 120px; height: 120px; }
+    .socials { justify-content: center; }
+    .nav { display: none; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    section { margin-bottom: 64px; }
+}
 
-    a[href]:after {
-        content: " (" attr(href) ")";
-    }
+@media (max-width: 600px) {
+    .cards, .hobbies, .edu { grid-template-columns: 1fr; }
+    .timeline li { grid-template-columns: 1fr; gap: 4px; }
+    .name { font-size: 34px; }
+}
 
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
-
-    /*
-     * Don't show links that are fragment identifiers,
-     * or use the `javascript:` pseudo protocol
-     */
-
-    a[href^="#"]:after,
-    a[href^="javascript:"]:after {
-        content: "";
-    }
-
-    pre {
-        white-space: pre-wrap !important;
-    }
-    pre,
-    blockquote {
-        border: 1px solid #999;
-        page-break-inside: avoid;
-    }
-
-    /*
-     * Printing Tables:
-     * http://css-discuss.incutio.com/wiki/Printing_Tables
-     */
-
-    thead {
-        display: table-header-group;
-    }
-
-    tr,
-    img {
-        page-break-inside: avoid;
-    }
-
-    p,
-    h2,
-    h3 {
-        orphans: 3;
-        widows: 3;
-    }
-
-    h2,
-    h3 {
-        page-break-after: avoid;
-    }
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+    html { scroll-behavior: auto; }
 }
